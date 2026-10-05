@@ -1,32 +1,40 @@
 let valuationChartInstance = null;
 let capacityGaugeInstance = null;
-let teamWorkloadChartInstance = null;
 
-// Mock Assessment Data Sets for Heatmaps
+// Expanded Assessment Frameworks for Heatmaps
 const assessmentData = {
     disc: [
-        { trait: "Dominance (D)", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Strong drive for results and direct decision-making." },
-        { trait: "Influence (I)", status: "Balanced", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "High collaboration, networking, and team engagement." },
-        { trait: "Steadiness (S)", status: "Light (Deficit)", color: "bg-rose-50 border-rose-200 text-rose-900", desc: "Risk of burnout; needs support in consistent execution." },
-        { trait: "Compliance (C)", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Rigorous attention to quality, rules, and accuracy." }
+        { trait: "Dominance (D)", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Results-driven leadership and direct execution." },
+        { trait: "Influence (I)", status: "Balanced", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "High engagement, communication, and collaboration." },
+        { trait: "Steadiness (S)", status: "Light (Deficit)", color: "bg-rose-50 border-rose-200 text-rose-900", desc: "Requires support in long-term operational consistency." },
+        { trait: "Compliance (C)", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Rigorous adherence to compliance and accuracy." }
     ],
     ocean: [
-        { trait: "Openness", status: "Balanced", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "High curiosity, creativity, and receptivity to innovation." },
-        { trait: "Conscientiousness", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Exceptional organization, dependability, and goal focus." },
-        { trait: "Extraversion", status: "Balanced", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "Energetic and social team communication dynamics." },
-        { trait: "Agreeableness", status: "Heavy (Cluster)", color: "bg-amber-50 border-amber-200 text-amber-900", desc: "High harmony; potential risk of avoiding necessary conflict." },
-        { trait: "Neuroticism (Stability)", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Strong emotional resilience under tight operational pressure." }
+        { trait: "Openness", status: "Balanced", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "High curiosity and receptivity to innovative processes." },
+        { trait: "Conscientiousness", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Disciplined task organization and deadline enforcement." },
+        { trait: "Extraversion", status: "Balanced", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "Dynamic interpersonal communication orientation." },
+        { trait: "Agreeableness", status: "Heavy (Cluster)", color: "bg-amber-50 border-amber-200 text-amber-900", desc: "High team harmony; monitor for conflict avoidance." },
+        { trait: "Neuroticism (Stability)", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "High emotional stability under high-stress conditions." }
+    ],
+    enneagram: [
+        { trait: "Type 3: Achiever", status: "Optimal", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Driven, goal-oriented, and performance-focused." },
+        { trait: "Type 6: Loyalist", status: "Balanced", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "Reliable, security-oriented, and risk-aware." },
+        { trait: "Type 8: Challenger", status: "Balanced", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "Decisive, protective, and direct leadership style." }
+    ],
+    mbti: [
+        { trait: "Extroversion vs Introversion", status: "Balanced (50/50)", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "Healthy mix of collaborative brainstormers and focused executioners." },
+        { trait: "Sensing vs Intuition", status: "Sensing Heavy", color: "bg-amber-50 border-amber-200 text-amber-900", desc: "Strong practical grounding; introduce intuitive planning." },
+        { trait: "Thinking vs Feeling", status: "Thinking Heavy", color: "bg-indigo-50 border-indigo-200 text-indigo-900", desc: "Objective logic prioritized in decision-making." },
+        { trait: "Judging vs Perceiving", status: "Judging Heavy", color: "bg-emerald-50 border-emerald-200 text-emerald-900", desc: "Highly structured, scheduled, and deadline-oriented." }
     ]
 };
 
-// Initialize application on load
 window.addEventListener('DOMContentLoaded', () => {
     initCharts();
     switchHeatmap('disc');
 });
 
 function initCharts() {
-    // Valuation Chart
     const ctxVal = document.getElementById('valuationChart').getContext('2d');
     valuationChartInstance = new Chart(ctxVal, {
         type: 'bar',
@@ -45,7 +53,6 @@ function initCharts() {
         }
     });
 
-    // Capacity Gauge
     const ctxCap = document.getElementById('capacityGauge').getContext('2d');
     capacityGaugeInstance = new Chart(ctxCap, {
         type: 'doughnut',
@@ -62,26 +69,6 @@ function initCharts() {
             circumference: 180,
             rotation: 270,
             plugins: { legend: { position: 'bottom' } }
-        }
-    });
-
-    // Team Workload Distribution Chart
-    const ctxTeam = document.getElementById('teamWorkloadChart').getContext('2d');
-    teamWorkloadChartInstance = new Chart(ctxTeam, {
-        type: 'bar',
-        data: {
-            labels: ['Alpha Team', 'Beta Ops', 'Gamma Supply', 'Delta Analytics'],
-            datasets: [{
-                label: 'Avg Weekly Hours',
-                data: [42, 38, 45, 40],
-                backgroundColor: '#6366f1'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, max: 60 } }
         }
     });
 }
@@ -104,8 +91,11 @@ function switchHeatmap(type) {
     });
 }
 
+let lastCalculatedNet = 87500;
+let lastCandidateName = "Candidate";
+
 async function processCandidate() {
-    const name = document.getElementById('candName').value || "Candidate";
+    lastCandidateName = document.getElementById('candName').value || "Jane Doe";
     const naics = document.getElementById('naicsSelect').value;
     const checkedDegrees = document.querySelectorAll('.deg-check:checked');
 
@@ -118,23 +108,38 @@ async function processCandidate() {
         const tisVal = 4000;
         const grossVal = baseVal + credVal + tisVal;
         const decayVal = Math.round(grossVal * (data.naics_decay_constants[naics] || 0.1));
-        const netVal = grossVal - decayVal;
+        lastCalculatedNet = grossVal - decayVal;
 
-        // Update UI Text
         document.getElementById('outBase').innerText = `$${baseVal.toLocaleString()}`;
         document.getElementById('outCred').innerText = `+$${credVal.toLocaleString()}`;
         document.getElementById('outTIS').innerText = `+$${tisVal.toLocaleString()}`;
         document.getElementById('outGross').innerText = `$${grossVal.toLocaleString()}`;
         document.getElementById('outDecay').innerText = `-$${decayVal.toLocaleString()}`;
-        document.getElementById('outNet').innerText = `$${netVal.toLocaleString()}`;
+        document.getElementById('outNet').innerText = `$${lastCalculatedNet.toLocaleString()}`;
+        document.getElementById('docStatus').innerText = `Auto-Verified via OCR`;
 
-        // Update Chart Data
-        valuationChartInstance.data.datasets[0].data = [baseVal, credVal, tisVal, grossVal, decayVal, netVal];
+        valuationChartInstance.data.datasets[0].data = [baseVal, credVal, tisVal, grossVal, decayVal, lastCalculatedNet];
         valuationChartInstance.update();
 
-        alert(`Success! Profile processed for ${name}. Net Asset Value calculated at $${netVal.toLocaleString()}.`);
+        alert(`Intake processed for ${lastCandidateName}! Net Asset Value: $${lastCalculatedNet.toLocaleString()}`);
     } catch (error) {
-        console.error("Error loading mock reference data:", error);
-        alert("Processed locally with fallback baseline variables.");
+        console.error("Error loading reference data:", error);
     }
+}
+
+function convertToTeamMember() {
+    const team = document.getElementById('teamSelect').value;
+    const role = document.getElementById('roleTitle').value;
+    const tbody = document.getElementById('rosterTableBody');
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td class="p-3 font-medium text-slate-800">${lastCandidateName}</td>
+        <td class="p-3">${team}</td>
+        <td class="p-3">${role}</td>
+        <td class="p-3 text-emerald-600 font-semibold">$${lastCalculatedNet.toLocaleString()}</td>
+        <td class="p-3"><span class="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full text-xs font-bold">40h / Optimal</span></td>
+    `;
+    tbody.appendChild(row);
+    alert(`${lastCandidateName} successfully added to the active roster under team: ${team}!`);
 }
