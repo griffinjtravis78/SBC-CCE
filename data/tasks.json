@@ -1,0 +1,12 @@
+[
+  { "task_id": "TSK-001", "title": "Bail Bond Institute Curriculum Drafting", "team": "Executive Operations", "estimated_hours": 12, "priority": "High", "status": "In Progress" },
+  { "task_id": "TSK-002", "title": "State HR Modernization Podcast Production", "team": "Executive Operations", "estimated_hours": 8, "priority": "Medium", "status": "Completed" },
+  { "task_id": "TSK-003", "title": "Tableau Workload Capacity Model Integration", "team": "Enterprise IT Modernization", "estimated_hours": 15, "priority": "High", "status": "In Progress" },
+  { "task_id": "TSK-004", "title": "Buick Encore GX Fleet Maintenance & Tire Audit", "team": "Supply Chain Taskforce", "estimated_hours": 4, "priority": "Low", "status": "Pending" },
+  { "task_id": "TSK-005", "title": "OU Supply Chain Graduate Module Assignment", "team": "Supply Chain Taskforce", "estimated_hours": 10, "priority": "High", "status": "In Progress" },
+  { "task_id": "TSK-006", "title": "ISO 9001 Quality Audit Documentation Review", "team": "Executive Operations", "estimated_hours": 14, "priority": "High", "status": "Pending" },
+  { "task_id": "TSK-007", "title": "Supabase Database Migration Script Optimization", "team": "Enterprise IT Modernization", "estimated_hours": 20, "priority": "High", "status": "In Progress" },
+  { "task_id": "TSK-008", "title": "Tri-State Auction Asset Cataloging & Tagging", "team": "Supply Chain Taskforce", "estimated_hours": 12, "priority": "Medium", "status": "Pending" },
+  { "task_id": "TSK-009", "title": "Change Management Training Deck Architecture", "team": "Executive Operations", "estimated_hours": 10, "priority": "Medium", "status": "Completed" },
+  { "task_id": "TSK-010", "title": "API Gateway Latency & Rate Limit Troubleshooting", "team": "Enterprise IT Modernization", "estimated_hours": 6, "priority": "High", "status": "In Progress" }
+]
