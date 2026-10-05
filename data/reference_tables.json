@@ -1,0 +1,30 @@
+{
+  "bls_baselines": {
+    "921110": 78000,
+    "541512": 95000,
+    "484110": 55000
+  },
+  "naics_decay_constants": {
+    "921110": 0.05,
+    "541512": 0.18,
+    "484110": 0.10
+  },
+  "credential_premiums": {
+    "BS Public Administration": 6000,
+    "Master of Public Admin": 12000,
+    "Supply Chain Certificate": 8000,
+    "CISSP": 10000,
+    "PMP": 8500,
+    "Six Sigma Black Belt": 9000
+  },
+  "operational_teams": [
+    "Executive Operations",
+    "Supply Chain Taskforce",
+    "Enterprise IT Modernization"
+  ],
+  "verification_states": [
+    "Auto-Verified",
+    "Pending Review",
+    "Mismatch Flagged"
+  ]
+}
