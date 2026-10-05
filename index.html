@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills-Based Capacity & Class-and-Comp Engine</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wide">Enterprise Workforce Engine <span class="text-xs bg-indigo-600 px-2 py-1 rounded text-white ml-2">Prototype v1.0</span></h1>
+            <nav class="space-x-4 text-sm text-slate-300">
+                <a href="#intake" class="hover:text-white">Candidate Intake</a>
+                <a href="#valuation" class="hover:text-white">Gross-to-Net Calculator</a>
+                <a href="#capacity" class="hover:text-white">Capacity & Teams</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow space-y-12">
+
+        <!-- Section 1: Candidate Intake Portal -->
+        <section id="intake" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">1. Candidate Ingestion & Credential Verification</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Candidate Full Name</label>
+                    <input type="text" id="candName" placeholder="e.g., Jane Doe" class="w-full border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Target NAICS Industry Code</label>
+                    <select id="naicsSelect" class="w-full border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500">
+                        <option value="921110">921110 - Public Administration</option>
+                        <option value="541512">541512 - Computer Systems Design</option>
+                        <option value="484110">484110 - Freight & Logistics</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Academic Degrees (Multi-Select)</label>
+                    <div class="space-y-2 border border-slate-200 p-3 rounded-lg bg-slate-50">
+                        <label class="flex items-center space-x-2 text-sm"><input type="checkbox" value="BS Political Science" class="deg-check"> <span>BS Political Science</span></label>
+                        <label class="flex items-center space-x-2 text-sm"><input type="checkbox" value="BS Public Administration" class="deg-check"> <span>BS Public Administration</span></label>
+                        <label class="flex items-center space-x-2 text-sm"><input type="checkbox" value="Master of Public Admin" class="deg-check"> <span>Master of Public Administration (MPA)</span></label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Transcript & Certification Uploads (Mandatory)</label>
+                    <input type="file" id="fileUpload" multiple class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                    <p class="text-xs text-slate-500 mt-1">Upload verified PDF transcripts, diplomas, or ISO certificates.</p>
+                </div>
+            </div>
+            <button onclick="processCandidate()" class="mt-6 bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition">Process Ingestion & Calculate Worth</button>
+        </section>
+
+        <!-- Section 2: Gross-to-Net Asset Valuation & Charts -->
+        <section id="valuation" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Summary Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Human Capital Asset Bill</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Base BLS Market Value:</span> <span id="outBase" class="font-semibold">$0</span></div>
+                        <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Credential Premiums:</span> <span id="outCred" class="font-semibold text-emerald-600">+$0</span></div>
+                        <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Time-in-Service Boost:</span> <span id="outTIS" class="font-semibold text-emerald-600">+$0</span></div>
+                        <div class="flex justify-between border-b pb-2 bg-indigo-50 p-1.5 rounded"><span class="font-bold text-indigo-900">Gross Worth:</span> <span id="outGross" class="font-bold text-indigo-900">$0</span></div>
+                        <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Knowledge Half-Life Decay:</span> <span id="outDecay" class="font-semibold text-rose-600">-$0</span></div>
+                        <div class="flex justify-between pt-2 bg-emerald-50 p-2 rounded"><span class="font-bold text-emerald-900">Net Final Asset Value:</span> <span id="outNet" class="font-bold text-emerald-900 text-lg">$0</span></div>
+                    </div>
+                </div>
+                <div class="mt-6 text-xs text-slate-400">Values derived via NAICS 6-digit wage index and exponential depreciation modeling.</div>
+            </div>
+
+            <!-- Visualization 1: Waterfall / Bar breakdown -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 lg:col-span-2">
+                <h3 class="text-lg font-bold text-slate-800 mb-4">Gross-to-Net Valuation Waterfall</h3>
+                <div class="h-64 flex items-center justify-center">
+                    <canvas id="valuationChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 40-Hour Capacity & Team Gauge -->
+        <section id="capacity" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-4">40-Hour Capacity Gauge</h3>
+                <div class="h-60 flex items-center justify-center">
+                    <canvas id="capacityGauge"></canvas>
+                </div>
+                <p class="text-center text-sm text-slate-600 mt-2">Allocated Workload: <span id="capacityHours" class="font-bold text-indigo-600">40 hrs / wk</span></p>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-4">Team DISC Balance Heatmap Preview</h3>
+                <div class="grid grid-cols-2 gap-4 h-60">
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 flex flex-col justify-center items-center text-center">
+                        <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Dominance (D)</span>
+                        <span class="text-2xl font-bold text-emerald-900 mt-1">Optimal</span>
+                    </div>
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 flex flex-col justify-center items-center text-center">
+                        <span class="text-xs font-bold text-indigo-800 uppercase tracking-wide">Influence (I)</span>
+                        <span class="text-2xl font-bold text-indigo-900 mt-1">Balanced</span>
+                    </div>
+                    <div class="bg-rose-50 border border-rose-200 rounded-lg p-4 flex flex-col justify-center items-center text-center">
+                        <span class="text-xs font-bold text-rose-800 uppercase tracking-wide">Steadiness (S)</span>
+                        <span class="text-2xl font-bold text-rose-900 mt-1">Light (Deficit)</span>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 flex flex-col justify-center items-center text-center">
+                        <span class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Compliance (C)</span>
+                        <span class="text-2xl font-bold text-emerald-900 mt-1">Optimal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-center py-6 mt-12 text-sm">
+        <p>&copy; 2026 Skills-Based Class & Comp Engine. Enterprise Workforce Architecture.</p>
+    </footer>
+
+    <!-- App Logic Script -->
+    <script src="app.js"></script>
+</body>
+</html>
