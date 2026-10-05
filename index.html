@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills-Based Capacity & Class-and-Comp Engine v1.4</title>
+    <title>Skills-Based Capacity & Class-and-Comp Engine v1.5</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
@@ -14,11 +14,11 @@
     <!-- Header -->
     <header class="bg-slate-900 text-white shadow-md">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-wide">Enterprise Workforce Engine <span class="text-xs bg-indigo-600 px-2 py-1 rounded text-white ml-2">v1.4 API Integrated</span></h1>
+            <h1 class="text-xl font-bold tracking-wide">Enterprise Workforce Engine <span class="text-xs bg-emerald-600 px-2 py-1 rounded text-white ml-2">v1.5 Full Feature Release</span></h1>
             <nav class="space-x-4 text-sm text-slate-300">
-                <a href="#intake" class="hover:text-white">Candidate Intake</a>
-                <a href="#valuation" class="hover:text-white">Gross-to-Net Worth</a>
-                <a href="#posthire" class="hover:text-white">Team Roster</a>
+                <a href="#intake" class="hover:text-white">Intake & Docs</a>
+                <a href="#valuation" class="hover:text-white">Waterfall Valuation</a>
+                <a href="#posthire" class="hover:text-white">Active Team Roster</a>
                 <a href="#assessments" class="hover:text-white">Psychometric Heatmaps</a>
             </nav>
         </div>
@@ -27,12 +27,16 @@
     <!-- Main Container -->
     <main class="max-w-7xl mx-auto px-6 py-8 flex-grow space-y-12">
 
-        <!-- Section 1: Candidate Ingestion & Live API Query -->
+        <!-- Section 1: Candidate Intake, Dropdowns & Document Verification Queue -->
         <section id="intake" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-slate-800">1. Candidate Ingestion & Live O*NET API Integration</h2>
-                <span class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-medium">O*NET & Census APIs Active</span>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-2">
+                <h2 class="text-2xl font-bold text-slate-800">1. Candidate Ingestion & Document Verification Pipeline</h2>
+                <div class="space-x-2">
+                    <span class="text-xs bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-1 rounded-full font-medium">Census API Connected[cite: 7]</span>
+                    <span class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-medium">O*NET API Active</span>
+                </div>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Candidate Full Name</label>
@@ -40,35 +44,59 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Target O*NET-SOC Occupation Code</label>
-                    <input type="text" id="socCode" value="11-3071.03" class="w-full border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500" placeholder="e.g., 11-3071.03 (Logistics)">
-                    <p class="text-xs text-slate-500 mt-1">Queries live O*NET Web Services for required core skills and competencies.</p>
+                    <select id="socCode" class="w-full border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500">
+                        <option value="11-3071.03">11-3071.03 - Supply Chain Managers</option>
+                        <option value="11-9151.00">11-9151.00 - Social and Community Service Managers</option>
+                        <option value="15-1211.00">15-1211.00 - Computer Systems Analysts</option>
+                        <option value="13-1111.00">13-1111.00 - Management Analysts</option>
+                    </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Academic Degrees (Multi-Select)</label>
-                    <div class="space-y-2 border border-slate-200 p-3 rounded-lg bg-slate-50">
-                        <label class="flex items-center space-x-2 text-sm"><input type="checkbox" value="BS Public Administration" class="deg-check"> <span>BS Public Administration</span></label>
-                        <label class="flex items-center space-x-2 text-sm"><input type="checkbox" value="Master of Public Admin" class="deg-check"> <span>Master of Public Administration (MPA)</span></label>
-                        <label class="flex items-center space-x-2 text-sm"><input type="checkbox" value="Supply Chain Certificate" class="deg-check"> <span>Graduate Cert Supply Chain Management</span></label>
-                    </div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Academic Degree Qualification</label>
+                    <select id="degreeSelect" class="w-full border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 mb-3">
+                        <option value="BS Public Administration">BS Public Administration</option>
+                        <option value="Master of Public Admin">Master of Public Administration (MPA)</option>
+                        <option value="BS Supply Chain Management">BS Supply Chain Management</option>
+                        <option value="BS Computer Science">BS Computer Science</option>
+                    </select>
+                    
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Degree Concentration / Track</label>
+                    <select id="concentrationSelect" class="w-full border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500">
+                        <option value="Public Policy & Management">Public Policy & Management</option>
+                        <option value="Logistics & Supply Chain Operations">Logistics & Supply Chain Operations</option>
+                        <option value="Enterprise Architecture & Change Management">Enterprise Architecture & Change Management</option>
+                        <option value="Data Analytics & Systems Engineering">Data Analytics & Systems Engineering</option>
+                    </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Live API Fetched Competencies</label>
-                    <div id="onetResultsBox" class="border border-slate-200 bg-slate-50 p-3 rounded-lg h-32 overflow-y-auto text-xs text-slate-600 space-y-1">
-                        <span class="text-slate-400 italic">Process candidate to pull live O*NET skills and technical specifications...</span>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Transcript & Certification Uploads</label>
+                    <input type="file" id="fileUpload" multiple class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                    <div class="mt-3 p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs space-y-1">
+                        <div class="flex justify-between font-semibold text-slate-700"><span>Verification Queue Status:</span> <span id="docStatus" class="text-emerald-600">Awaiting Upload</span></div>
+                        <div class="text-slate-500">OCR Pipeline: Ready for automated credential parsing.</div>
                     </div>
                 </div>
             </div>
-            <button onclick="processCandidateWithAPI()" class="mt-6 bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition">Execute Ingestion & Query O*NET API</button>
+
+            <!-- Live O*NET API Box -->
+            <div class="mt-6">
+                <label class="block text-sm font-medium text-slate-700 mb-2">Live O*NET API Fetched Competencies & Taxonomies</label>
+                <div id="onetResultsBox" class="border border-slate-200 bg-slate-50 p-3 rounded-lg h-28 overflow-y-auto text-xs text-slate-600 space-y-1">
+                    <span class="text-slate-400 italic">Process candidate to query live O*NET Web Services API...</span>
+                </div>
+            </div>
+
+            <button onclick="processCandidateWithAPI()" class="mt-6 bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition">Execute Ingestion & Query APIs</button>
         </section>
 
-        <!-- Section 2: Gross-to-Net Asset Valuation -->
+        <!-- Section 2: Gross-to-Net Asset Valuation Waterfall -->
         <section id="valuation" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
                 <div>
                     <h3 class="text-lg font-bold text-slate-800 mb-4">Human Capital Asset Bill</h3>
                     <div class="space-y-3 text-sm">
                         <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Base BLS Market Value:</span> <span id="outBase" class="font-semibold">$0</span></div>
-                        <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Credential Premiums:</span> <span id="outCred" class="font-semibold text-emerald-600">+$0</span></div>
+                        <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Credential Premium:</span> <span id="outCred" class="font-semibold text-emerald-600">+$0</span></div>
                         <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Time-in-Service Boost:</span> <span id="outTIS" class="font-semibold text-emerald-600">+$0</span></div>
                         <div class="flex justify-between border-b pb-2 bg-indigo-50 p-1.5 rounded"><span class="font-bold text-indigo-900">Gross Worth:</span> <span id="outGross" class="font-bold text-indigo-900">$0</span></div>
                         <div class="flex justify-between border-b pb-2"><span class="text-slate-600">Knowledge Half-Life Decay:</span> <span id="outDecay" class="font-semibold text-rose-600">-$0</span></div>
@@ -77,19 +105,23 @@
                 </div>
             </div>
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 lg:col-span-2">
-                <h3 class="text-lg font-bold text-slate-800 mb-4">Valuation Waterfall Breakdown</h3>
+                <h3 class="text-lg font-bold text-slate-800 mb-4">Gross-to-Net Valuation Waterfall Breakdown</h3>
                 <div class="h-64 flex items-center justify-center">
                     <canvas id="valuationChart"></canvas>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Post-Hire Team Roster -->
+        <!-- Section 3: Active Team Roster Management -->
         <section id="posthire" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
-            <h2 class="text-2xl font-bold text-slate-800 mb-6">3. Post-Hire Lifecycle & Team Operations Roster</h2>
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">3. Post-Hire Lifecycle & Team Operations Roster</h2>
+                <span id="stagedCountBadge" class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-medium">Loading Staged Records...</span>
+            </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Assign to Operational Team</label>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Assign Processed Candidate to Team</label>
                     <select id="teamSelect" class="w-full border border-slate-300 rounded-lg p-2.5">
                         <option value="Executive Operations">Executive Operations</option>
                         <option value="Supply Chain Taskforce">Supply Chain Taskforce</option>
@@ -98,42 +130,37 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Assigned Role Title</label>
-                    <input type="text" id="roleTitle" value="Change Management Lead" class="w-full border border-slate-300 rounded-lg p-2.5">
+                    <input type="text" id="roleTitle" value="State Training Lead & Change Specialist" class="w-full border border-slate-300 rounded-lg p-2.5">
                 </div>
                 <div class="flex items-end">
                     <button onclick="convertToTeamMember()" class="w-full bg-emerald-600 text-white py-2.5 rounded-lg font-medium hover:bg-emerald-700 transition">Transition to Active Roster</button>
                 </div>
             </div>
+
             <div class="overflow-x-auto border border-slate-200 rounded-lg">
                 <table class="w-full text-left text-sm text-slate-600">
                     <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
                         <tr>
-                            <th class="p-3">Team Member</th>
-                            <th class="p-3">Team Assignment</th>
-                            <th class="p-3">Role</th>
+                            <th class="p-3">Personnel Name</th>
+                            <th class="p-3">Team / Status</th>
+                            <th class="p-3">Assigned Role</th>
                             <th class="p-3">Net Asset Value</th>
                             <th class="p-3">Capacity Gauge</th>
                         </tr>
                     </thead>
                     <tbody id="rosterTableBody" class="divide-y divide-slate-200">
-                        <tr>
-                            <td class="p-3 font-medium text-slate-800">Travis Griffin</td>
-                            <td class="p-3">Executive Operations</td>
-                            <td class="p-3">Principal / State Training Lead</td>
-                            <td class="p-3 text-emerald-600 font-semibold">$98,500</td>
-                            <td class="p-3"><span class="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full text-xs font-bold">40h / Optimal</span></td>
-                        </tr>
+                        <!-- Populated dynamically via staged JSON data -->
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Section 4: Psychometric Heatmaps -->
+        <!-- Section 4: Expanded Psychometric Heatmaps -->
         <section id="assessments" class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                 <div>
                     <h2 class="text-2xl font-bold text-slate-800">4. Psychometric & Behavioral Balance Heatmaps</h2>
-                    <p class="text-sm text-slate-500 mt-1">Select an assessment framework to evaluate team balance and leadership fit.</p>
+                    <p class="text-sm text-slate-500 mt-1">Evaluate structural balance across psychological frameworks.</p>
                 </div>
                 <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
                     <button onclick="switchHeatmap('disc')" class="bg-indigo-600 text-white px-3.5 py-2 rounded-lg text-sm font-medium transition hover:bg-indigo-700">DISC</button>
