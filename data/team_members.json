@@ -1,0 +1,12 @@
+[
+  { "id": "TM-01", "name": "Travis Griffin", "team": "Executive Operations", "role": "Principal / State Training Lead", "naics": "921110", "net_value": 98500, "allocated_hours": 40, "capacity_status": "Optimal" },
+  { "id": "TM-02", "name": "Jeffery Terry", "team": "Executive Operations", "role": "Senior Public Sector Analyst", "naics": "921110", "net_value": 89000, "allocated_hours": 38, "capacity_status": "Optimal" },
+  { "id": "TM-03", "name": "Aaliyah Chen", "team": "Supply Chain Taskforce", "role": "Logistics Coordinator", "naics": "484110", "net_value": 67000, "allocated_hours": 45, "capacity_status": "Overloaded" },
+  { "id": "TM-04", "name": "Damon Vance", "team": "Enterprise IT Modernization", "role": "Systems Architect", "naics": "541512", "net_value": 115000, "allocated_hours": 40, "capacity_status": "Optimal" },
+  { "id": "TM-05", "name": "Rachel Zane", "team": "Enterprise IT Modernization", "role": "Change Management Specialist", "naics": "541512", "net_value": 82000, "allocated_hours": 35, "capacity_status": "Under-utilized" },
+  { "id": "TM-06", "name": "Brian Litt", "team": "Executive Operations", "role": "Compliance Auditor", "naics": "921110", "net_value": 75000, "allocated_hours": 40, "capacity_status": "Optimal" },
+  { "id": "TM-07", "name": "Katrina Bennett", "team": "Enterprise IT Modernization", "role": "Database Engineer", "naics": "541512", "net_value": 94000, "allocated_hours": 42, "capacity_status": "Optimal" },
+  { "id": "TM-08", "name": "Louis Ross", "team": "Supply Chain Taskforce", "role": "Procurement Specialist", "naics": "484110", "net_value": 71000, "allocated_hours": 30, "capacity_status": "Under-utilized" },
+  { "id": "TM-09", "name": "Donna Paulsen", "team": "Executive Operations", "role": "Executive Assistant & Communications Lead", "naics": "921110", "net_value": 68000, "allocated_hours": 40, "capacity_status": "Optimal" },
+  { "id": "TM-10", "name": "Harvey Specter", "team": "Executive Operations", "role": "Senior Strategy Consultant", "naics": "921110", "net_value": 135000, "allocated_hours": 48, "capacity_status": "Overloaded" }
+]
